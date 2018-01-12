@@ -1,0 +1,205 @@
+﻿@model Tienda.Models.factura
+
+@{
+    ViewBag.Title = "Edit";
+    HtmlHelper.ClientValidationEnabled = false;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>factura</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.FECHA_FACTURA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHA_FACTURA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FECHA_FACTURA, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID_FACTURA)
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ID_SUCURSAL_FACTURA, "Sucursal", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_SUCURSAL_FACTURA", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_SUCURSAL_FACTURA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ID_CLIENTE_FACTURA, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_CLIENTE_FACTURA", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_CLIENTE_FACTURA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ID_EMPLEADO_FACTURA, "Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_EMPLEADO_FACTURA", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_EMPLEADO_FACTURA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.NUMERO_COMPROBANTE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NUMERO_COMPROBANTE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NUMERO_COMPROBANTE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10 form-inline">
+                <input type="text" class="form-control" id="codigoProducto" />
+                <input type="button" value="Agregar Producto" class="btn btn-success" onclick="AgregarProducto()" />
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <table id="tablaDetalleProductos" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio Unitario</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="bodyTableDetalle">
+                    @{
+                        int count = 0;
+                    }
+                    @foreach (var producto in Model.factura_producto)
+                    {
+                        <tr class="@if (producto.PRECIO_TOTAL_PRODUCTO == 0) {<text> hidden-element </text> } ">
+                                <td>@Html.TextBox("factura_producto[" + count + "].CANTIDAD_PRODUCTO", producto.CANTIDAD_PRODUCTO, new { @class = "form-control" })</td>
+                                <td>
+                                    @Html.TextBox("Producto", producto.producto.NOMBRE_PRODUCTO, new { @class = "form-control" })
+                                    @Html.Hidden("factura_producto[" + count + "].ID_PRODUCTO", producto.ID_PRODUCTO)
+                                    @Html.Hidden("factura_producto[" + count + "].ID_FACPROD", producto.ID_FACPROD)
+                                    @Html.Hidden("factura_producto[" + count + "].ID_FACTURA", Model.ID_FACTURA)
+                                </td>
+                                <td>@Html.TextBox("PrecioUnitario" + count, producto.producto.VENTA_PRODUCTO, new { @class = "form-control" })</td>
+                                <td>@Html.TextBox("factura_producto[" + count + "].PRECIO_TOTAL_PRODUCTO", producto.PRECIO_TOTAL_PRODUCTO, new { @class = "form-control" })</td>
+                                <td><input type="button" value="Delete" class="btn btn-danger" onclick="DeleteRow(this,@count)" /></td>
+                        </tr>  
+                        count++;
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="control-derecho form-inline">
+            @Html.Label("Total Compra")
+            @Html.EditorFor(model => model.PRECIO_TOTAL, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    @*<div class="form-horizontal">
+        <h4>factura</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID_FACTURA)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FECHA_FACTURA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHA_FACTURA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FECHA_FACTURA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_SUCURSAL_FACTURA, "ID_SUCURSAL_FACTURA", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_SUCURSAL_FACTURA", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_SUCURSAL_FACTURA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_CLIENTE_FACTURA, "ID_CLIENTE_FACTURA", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_CLIENTE_FACTURA", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_CLIENTE_FACTURA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_EMPLEADO_FACTURA, "ID_EMPLEADO_FACTURA", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_EMPLEADO_FACTURA", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_EMPLEADO_FACTURA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <table id="tablaDetalleProductos" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio Unitario</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="bodyTableDetalle">
+                    @{
+                        int count = 0;
+                     }
+                    @foreach (var producto in Model.factura_producto)
+                    {
+                        <tr>
+                            <td>@Html.TextBox("factura_producto[" + count + "].CANTIDAD_PRODUCTO", producto.CANTIDAD_PRODUCTO)</td>
+                            <td>
+                                @Html.TextBox("Producto", producto.producto.NOMBRE_PRODUCTO)
+                                @Html.Hidden("factura_producto[" + count + "].ID_PRODUCTO", producto.ID_PRODUCTO)
+                            </td>
+                            <td>@Html.TextBox("PrecioUnitario" + count, producto.producto.VENTA_PRODUCTO, new { @class = "form-control" })</td>
+                            <td>@Html.TextBox("factura_producto[" + count + "].PRECIO_TOTAL_PRODUCTO", producto.PRECIO_TOTAL_PRODUCTO, new { @class = "form-control" })</td>
+                            <td><input type="submit" value="Delete" class="btn btn-danger" /> </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
+}
+
+<div>
+    @Html.ActionLink("Regresar a Lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryval")
+
+<script>
+        $(document).ready(function () {
+            $(window).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+</script>  
+}

@@ -1,0 +1,90 @@
+﻿@model Tienda.Models.persona
+
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <h4>Persona</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PRIMER_NOMBRE_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRIMER_NOMBRE_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEGUNDO_NOMBRE_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEGUNDO_NOMBRE_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRIMER_APELLIDO_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRIMER_APELLIDO_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEGUNDO_APELLIDO_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEGUNDO_APELLIDO_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_NACIMIENTO_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_NACIMIENTO_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUMERO_IDENTIDAD_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUMERO_IDENTIDAD_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIRECCION_RESIDENCIA_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIRECCION_RESIDENCIA_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ciudad.NOMBRE_CIUDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciudad.NOMBRE_CIUDAD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sexo.SEXO1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sexo.SEXO1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_PERSONA }) |
+    @Html.ActionLink("Regresar a Lista", "Index")
+</p>

@@ -1,0 +1,11 @@
+﻿@model Tienda.Models.producto
+
+<tr>
+    <td>@Html.TextBox("factura_producto[" + (string)ViewBag.Indice + "].CANTIDAD_PRODUCTO", null, new { @class = "form-control", @onkeyup = "CalcularTotalProducto(this,"+ (string)ViewBag.Indice + ",event);", @onkeypress = "SoloNumeros(event)" })</td>
+    <td>@Html.TextBox("Producto", Model.NOMBRE_PRODUCTO, new { @class = "form-control" })
+    @Html.Hidden("factura_producto[" + (string)ViewBag.Indice + "].ID_PRODUCTO",Model.ID_PRODUCTO)</td>
+    <td>@Html.TextBox("PrecioUnitario"+ (string)ViewBag.Indice, Model.VENTA_PRODUCTO, new { @class = "form-control" })</td>
+    <td>@Html.TextBox("factura_producto[" + (string)ViewBag.Indice + "].PRECIO_TOTAL_PRODUCTO", null, new { @class = "form-control" })</td>
+    <td>@Html.Hidden("factura_producto[" + (string)ViewBag.Indice + "].Estado", "AC")
+    <input type="button" value="Delete" class="btn btn-danger" onclick="DeleteRow(this,@ViewBag.Indice)" /> </td>
+</tr>

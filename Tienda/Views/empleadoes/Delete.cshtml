@@ -1,0 +1,64 @@
+﻿@model Tienda.Models.empleado
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que desea eliminar este item?</h3>
+<div>
+    <h4>Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_CONTRATACION_EMPLEADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_CONTRATACION_EMPLEADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HORAS_LABORALES_MENSUALES_EMPLEADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HORAS_LABORALES_MENSUALES_EMPLEADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cargo_laboral.CARGO_LABORAL1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cargo_laboral.CARGO_LABORAL1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.PRIMER_NOMBRE_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.PRIMER_NOMBRE_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a Lista", "Index")
+        </div>
+    }
+</div>

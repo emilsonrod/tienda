@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Tienda.Models.tipo_producto>
+
+@{
+    ViewBag.Title = "Lista Tipo Producto";
+}
+
+<h2>Lista Tipo Producto</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_TIPO_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION_TIPO_PRODUCTO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_TIPO_PRODUCTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION_TIPO_PRODUCTO)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_TIPO_PRODUCTO }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_TIPO_PRODUCTO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_TIPO_PRODUCTO })
+        </td>
+    </tr>
+}
+
+</table>

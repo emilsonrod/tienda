@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Tienda.Models.producto>
+
+@{
+    ViewBag.Title = "Lista Productos";
+}
+
+<h2>Lista Productos</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<div class="form-group">
+    <div class="col-md-10 form-inline">
+        <input type="text" class="form-control" id="codigoProducto" />
+        <input type="button" value="Buscar Producto" class="btn btn-success" onclick="BuscarProducto()" />
+    </div>
+</div>
+<div id="tableProductos" class="col-md-12">
+    @Html.Partial("_partialListProductos")
+</div>

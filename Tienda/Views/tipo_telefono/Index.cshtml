@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Tienda.Models.tipo_telefono>
+
+@{
+    ViewBag.Title = "Lista Tipo Telefono";
+}
+
+<h2>Lista Tipo Telefono</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TIPO_TELEFONO1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION_TIPO_TELEFONO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIPO_TELEFONO1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION_TIPO_TELEFONO)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_TIPO_TELEFONO }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_TIPO_TELEFONO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_TIPO_TELEFONO })
+        </td>
+    </tr>
+}
+
+</table>

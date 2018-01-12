@@ -1,0 +1,40 @@
+﻿@model Tienda.Models.ciudad
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que quiere eliminar este registro?</h3>
+<div>
+    <h4>ciudad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_CIUDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_CIUDAD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departamento.NOMBRE_DEPARTAMENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departamento.NOMBRE_DEPARTAMENTO)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>

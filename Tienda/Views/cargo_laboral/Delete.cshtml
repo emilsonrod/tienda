@@ -1,0 +1,48 @@
+﻿@model Tienda.Models.cargo_laboral
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro de eliminar este item?</h3>
+<div>
+    <h4>Cargo Laboral</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CARGO_LABORAL1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARGO_LABORAL1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION_CARGO_LABORAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION_CARGO_LABORAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SALARIO_MENSUAL_CARGO_LABORAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SALARIO_MENSUAL_CARGO_LABORAL)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a Lista", "Index")
+        </div>
+    }
+</div>

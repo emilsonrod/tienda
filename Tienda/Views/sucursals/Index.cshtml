@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Tienda.Models.sucursal>
+
+@{
+    ViewBag.Title = "Lista de Sucursales";
+}
+
+<h2>Lista de Sucursales</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_SUCURSAL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ciudad.NOMBRE_CIUDAD)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_SUCURSAL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ciudad.NOMBRE_CIUDAD)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_SUCURSAL }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_SUCURSAL }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_SUCURSAL })
+        </td>
+    </tr>
+}
+
+</table>

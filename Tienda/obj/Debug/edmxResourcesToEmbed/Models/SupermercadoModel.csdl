@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bd_supermercadoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cargo_laboral">
+    <Key>
+      <PropertyRef Name="ID_CARGO_LABORAL" />
+    </Key>
+    <Property Name="ID_CARGO_LABORAL" Type="Int32" Nullable="false" />
+    <Property Name="CARGO_LABORAL1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION_CARGO_LABORAL" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="SALARIO_MENSUAL_CARGO_LABORAL" Type="Single" />
+    <NavigationProperty Name="empleado" Relationship="Self.FK_ID_CARGO_LABORAL_EMPLEADO" FromRole="cargo_laboral" ToRole="empleado" />
+  </EntityType>
+  <EntityType Name="ciudad">
+    <Key>
+      <PropertyRef Name="ID_CIUDAD" />
+    </Key>
+    <Property Name="ID_CIUDAD" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_CIUDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_DEPARTAMENTO_CIUDAD" Type="Int32" />
+    <NavigationProperty Name="departamento" Relationship="Self.FK_DEPARTAMENTO_CIUDAD" FromRole="ciudad" ToRole="departamento" />
+    <NavigationProperty Name="persona" Relationship="Self.FK_ID_CIUDAD_RESIDENCIA_PERSONA" FromRole="ciudad" ToRole="persona" />
+    <NavigationProperty Name="sucursal" Relationship="Self.FK_ID_CIUDAD_SUCURSAL" FromRole="ciudad" ToRole="sucursal" />
+  </EntityType>
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="ID_CLIENTE" />
+    </Key>
+    <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" />
+    <Property Name="PERSONA_ID_PERSONA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="factura" Relationship="Self.FK_CLIENTE_FACTURA" FromRole="cliente" ToRole="factura" />
+    <NavigationProperty Name="persona" Relationship="Self.fk_CLIENTE_PERSONA1" FromRole="cliente" ToRole="persona" />
+  </EntityType>
+  <EntityType Name="departamento">
+    <Key>
+      <PropertyRef Name="ID_DEPARTAMENTO" />
+    </Key>
+    <Property Name="ID_DEPARTAMENTO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_DEPARTAMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_PAIS_DEPARTAMENTO" Type="Int32" />
+    <NavigationProperty Name="ciudad" Relationship="Self.FK_DEPARTAMENTO_CIUDAD" FromRole="departamento" ToRole="ciudad" />
+    <NavigationProperty Name="pais" Relationship="Self.FK_ID_PAIS_DEPARTAMENTO" FromRole="departamento" ToRole="pais" />
+  </EntityType>
+  <EntityType Name="empleado">
+    <Key>
+      <PropertyRef Name="ID_EMPLEADO" />
+    </Key>
+    <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_CONTRATACION_EMPLEADO" Type="DateTime" />
+    <Property Name="HORAS_LABORALES_MENSUALES_EMPLEADO" Type="Int32" />
+    <Property Name="ID_CARGO_LABORAL_EMPLEADO" Type="Int32" />
+    <Property Name="ID_SUCURSAL_EMPLEADO" Type="Int32" />
+    <Property Name="PERSONA_ID_PERSONA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cargo_laboral" Relationship="Self.FK_ID_CARGO_LABORAL_EMPLEADO" FromRole="empleado" ToRole="cargo_laboral" />
+    <NavigationProperty Name="persona" Relationship="Self.fk_EMPLEADO_PERSONA1" FromRole="empleado" ToRole="persona" />
+    <NavigationProperty Name="factura" Relationship="Self.FK_ID_EMPLEADO" FromRole="empleado" ToRole="factura" />
+    <NavigationProperty Name="sucursal" Relationship="Self.FK_ID_SUCURSAL_EMPLEADO" FromRole="empleado" ToRole="sucursal" />
+  </EntityType>
+  <EntityType Name="factura">
+    <Key>
+      <PropertyRef Name="ID_FACTURA" />
+    </Key>
+    <Property Name="ID_FACTURA" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_FACTURA" Type="DateTime" />
+    <Property Name="ID_SUCURSAL_FACTURA" Type="Int32" />
+    <Property Name="ID_CLIENTE_FACTURA" Type="Int32" />
+    <Property Name="ID_EMPLEADO_FACTURA" Type="Int32" />
+    <NavigationProperty Name="cliente" Relationship="Self.FK_CLIENTE_FACTURA" FromRole="factura" ToRole="cliente" />
+    <NavigationProperty Name="empleado" Relationship="Self.FK_ID_EMPLEADO" FromRole="factura" ToRole="empleado" />
+    <NavigationProperty Name="sucursal" Relationship="Self.FK_ID_SUCURSAL_FACTURA" FromRole="factura" ToRole="sucursal" />
+    <NavigationProperty Name="producto" Relationship="Self.factura_producto" FromRole="factura" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="pais">
+    <Key>
+      <PropertyRef Name="ID_PAIS" />
+    </Key>
+    <Property Name="ID_PAIS" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_PAIS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="departamento" Relationship="Self.FK_ID_PAIS_DEPARTAMENTO" FromRole="pais" ToRole="departamento" />
+  </EntityType>
+  <EntityType Name="persona">
+    <Key>
+      <PropertyRef Name="ID_PERSONA" />
+    </Key>
+    <Property Name="ID_PERSONA" Type="Int32" Nullable="false" />
+    <Property Name="PRIMER_NOMBRE_PERSONA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SEGUNDO_NOMBRE_PERSONA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PRIMER_APELLIDO_PERSONA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SEGUNDO_APELLIDO_PERSONA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA_NACIMIENTO_PERSONA" Type="DateTime" />
+    <Property Name="NUMERO_IDENTIDAD_PERSONA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCION_RESIDENCIA_PERSONA" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="ID_CIUDAD_RESIDENCIA_PERSONA" Type="Int32" />
+    <Property Name="ID_SEXO_PERSONA" Type="Int32" />
+    <NavigationProperty Name="ciudad" Relationship="Self.FK_ID_CIUDAD_RESIDENCIA_PERSONA" FromRole="persona" ToRole="ciudad" />
+    <NavigationProperty Name="cliente" Relationship="Self.fk_CLIENTE_PERSONA1" FromRole="persona" ToRole="cliente" />
+    <NavigationProperty Name="empleado" Relationship="Self.fk_EMPLEADO_PERSONA1" FromRole="persona" ToRole="empleado" />
+    <NavigationProperty Name="telefomno" Relationship="Self.FK_ID_PERSONA_TELEFONO" FromRole="persona" ToRole="telefomno" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_ID_PERSONA_USUARIO" FromRole="persona" ToRole="usuario" />
+    <NavigationProperty Name="sexo" Relationship="Self.FK_ID_SEXO_PERSONA" FromRole="persona" ToRole="sexo" />
+  </EntityType>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="ID_PRODUCTO" />
+    </Key>
+    <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA_ELABORACION_PRODUCTO" Type="DateTime" />
+    <Property Name="FECHA_VENCIMIENTO_PRODUCTO" Type="DateTime" />
+    <Property Name="COMPRA_PRODUCTO" Type="Single" />
+    <Property Name="VENTA_PRODUCTO" Type="Single" />
+    <Property Name="CANTIDAD_PRODUCTO" Type="Int32" />
+    <Property Name="DESCRIPCION_PRODUCTO" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="ID_TIPO_PRODUCTO" Type="Int32" />
+    <Property Name="ID_SUCURSAL_PRODUCTO" Type="Int32" />
+    <Property Name="Codigo_Producto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="sucursal" Relationship="Self.FK_ID_SUCURSAL_PRODUCTO" FromRole="producto" ToRole="sucursal" />
+    <NavigationProperty Name="tipo_producto" Relationship="Self.FK_ID_TIPO_PRODUCTO" FromRole="producto" ToRole="tipo_producto" />
+    <NavigationProperty Name="factura" Relationship="Self.factura_producto" FromRole="producto" ToRole="factura" />
+    <NavigationProperty Name="proveedor" Relationship="Self.producto_proveedor" FromRole="producto" ToRole="proveedor" />
+  </EntityType>
+  <EntityType Name="proveedor">
+    <Key>
+      <PropertyRef Name="ID_PROVEEDOR" />
+    </Key>
+    <Property Name="ID_PROVEEDOR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="producto" Relationship="Self.producto_proveedor" FromRole="proveedor" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="rol_bd">
+    <Key>
+      <PropertyRef Name="ID_ROL_BD" />
+    </Key>
+    <Property Name="ID_ROL_BD" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_ROL_BD" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.usuario_rol_bd" FromRole="rol_bd" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="rol_servidor">
+    <Key>
+      <PropertyRef Name="ID_ROL_SERVIDOR" />
+    </Key>
+    <Property Name="ID_ROL_SERVIDOR" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_ROL_SERVIDOR" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.usuario_rol_servidor" FromRole="rol_servidor" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="sexo">
+    <Key>
+      <PropertyRef Name="ID_SEXO" />
+    </Key>
+    <Property Name="ID_SEXO" Type="Int32" Nullable="false" />
+    <Property Name="SEXO1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="persona" Relationship="Self.FK_ID_SEXO_PERSONA" FromRole="sexo" ToRole="persona" />
+  </EntityType>
+  <EntityType Name="sucursal">
+    <Key>
+      <PropertyRef Name="ID_SUCURSAL" />
+    </Key>
+    <Property Name="ID_SUCURSAL" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_SUCURSAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_CIUDAD_SUCURSAL" Type="Int32" />
+    <NavigationProperty Name="ciudad" Relationship="Self.FK_ID_CIUDAD_SUCURSAL" FromRole="sucursal" ToRole="ciudad" />
+    <NavigationProperty Name="empleado" Relationship="Self.FK_ID_SUCURSAL_EMPLEADO" FromRole="sucursal" ToRole="empleado" />
+    <NavigationProperty Name="factura" Relationship="Self.FK_ID_SUCURSAL_FACTURA" FromRole="sucursal" ToRole="factura" />
+    <NavigationProperty Name="producto" Relationship="Self.FK_ID_SUCURSAL_PRODUCTO" FromRole="sucursal" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="telefomno">
+    <Key>
+      <PropertyRef Name="ID_TELEFONO" />
+    </Key>
+    <Property Name="ID_TELEFONO" Type="Int32" Nullable="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ID_TIPO_TELEFONO" Type="Int32" />
+    <Property Name="ID_PERSONA_TELEFONO" Type="Int32" />
+    <NavigationProperty Name="persona" Relationship="Self.FK_ID_PERSONA_TELEFONO" FromRole="telefomno" ToRole="persona" />
+    <NavigationProperty Name="tipo_telefono" Relationship="Self.FK_ID_TIPO_TELEFONO" FromRole="telefomno" ToRole="tipo_telefono" />
+  </EntityType>
+  <EntityType Name="tipo_producto">
+    <Key>
+      <PropertyRef Name="ID_TIPO_PRODUCTO" />
+    </Key>
+    <Property Name="ID_TIPO_PRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_TIPO_PRODUCTO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION_TIPO_PRODUCTO" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="producto" Relationship="Self.FK_ID_TIPO_PRODUCTO" FromRole="tipo_producto" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="tipo_telefono">
+    <Key>
+      <PropertyRef Name="ID_TIPO_TELEFONO" />
+    </Key>
+    <Property Name="ID_TIPO_TELEFONO" Type="Int32" Nullable="false" />
+    <Property Name="TIPO_TELEFONO1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION_TIPO_TELEFONO" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="telefomno" Relationship="Self.FK_ID_TIPO_TELEFONO" FromRole="tipo_telefono" ToRole="telefomno" />
+  </EntityType>
+  <EntityType Name="tipo_usuario">
+    <Key>
+      <PropertyRef Name="ID_TIPO_USUARIO" />
+    </Key>
+    <Property Name="ID_TIPO_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_TIO_USUARIO" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_ID_TIPO_USUSARIO" FromRole="tipo_usuario" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CONTRASENA_USUARIO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ID_TIPO_USUARIO" Type="Int32" />
+    <Property Name="ID_PERSONA_USUARIO" Type="Int32" />
+    <NavigationProperty Name="persona" Relationship="Self.FK_ID_PERSONA_USUARIO" FromRole="usuario" ToRole="persona" />
+    <NavigationProperty Name="tipo_usuario" Relationship="Self.FK_ID_TIPO_USUSARIO" FromRole="usuario" ToRole="tipo_usuario" />
+    <NavigationProperty Name="rol_bd" Relationship="Self.usuario_rol_bd" FromRole="usuario" ToRole="rol_bd" />
+    <NavigationProperty Name="rol_servidor" Relationship="Self.usuario_rol_servidor" FromRole="usuario" ToRole="rol_servidor" />
+  </EntityType>
+  <Association Name="FK_ID_CARGO_LABORAL_EMPLEADO">
+    <End Role="cargo_laboral" Type="Self.cargo_laboral" Multiplicity="0..1" />
+    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cargo_laboral">
+        <PropertyRef Name="ID_CARGO_LABORAL" />
+      </Principal>
+      <Dependent Role="empleado">
+        <PropertyRef Name="ID_CARGO_LABORAL_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEPARTAMENTO_CIUDAD">
+    <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+    <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamento">
+        <PropertyRef Name="ID_DEPARTAMENTO" />
+      </Principal>
+      <Dependent Role="ciudad">
+        <PropertyRef Name="ID_DEPARTAMENTO_CIUDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_CIUDAD_RESIDENCIA_PERSONA">
+    <End Role="ciudad" Type="Self.ciudad" Multiplicity="0..1" />
+    <End Role="persona" Type="Self.persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ciudad">
+        <PropertyRef Name="ID_CIUDAD" />
+      </Principal>
+      <Dependent Role="persona">
+        <PropertyRef Name="ID_CIUDAD_RESIDENCIA_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_CIUDAD_SUCURSAL">
+    <End Role="ciudad" Type="Self.ciudad" Multiplicity="0..1" />
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ciudad">
+        <PropertyRef Name="ID_CIUDAD" />
+      </Principal>
+      <Dependent Role="sucursal">
+        <PropertyRef Name="ID_CIUDAD_SUCURSAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLIENTE_FACTURA">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+    <End Role="factura" Type="Self.factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="ID_CLIENTE" />
+      </Principal>
+      <Dependent Role="factura">
+        <PropertyRef Name="ID_CLIENTE_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_CLIENTE_PERSONA1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="ID_PERSONA" />
+      </Principal>
+      <Dependent Role="cliente">
+        <PropertyRef Name="PERSONA_ID_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_PAIS_DEPARTAMENTO">
+    <End Role="pais" Type="Self.pais" Multiplicity="0..1" />
+    <End Role="departamento" Type="Self.departamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pais">
+        <PropertyRef Name="ID_PAIS" />
+      </Principal>
+      <Dependent Role="departamento">
+        <PropertyRef Name="ID_PAIS_DEPARTAMENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_EMPLEADO_PERSONA1">
+    <End Role="persona" Type="Self.persona" Multiplicity="1" />
+    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="ID_PERSONA" />
+      </Principal>
+      <Dependent Role="empleado">
+        <PropertyRef Name="PERSONA_ID_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_EMPLEADO">
+    <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+    <End Role="factura" Type="Self.factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empleado">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="factura">
+        <PropertyRef Name="ID_EMPLEADO_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_SUCURSAL_EMPLEADO">
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="0..1" />
+    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sucursal">
+        <PropertyRef Name="ID_SUCURSAL" />
+      </Principal>
+      <Dependent Role="empleado">
+        <PropertyRef Name="ID_SUCURSAL_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_SUCURSAL_FACTURA">
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="0..1" />
+    <End Role="factura" Type="Self.factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sucursal">
+        <PropertyRef Name="ID_SUCURSAL" />
+      </Principal>
+      <Dependent Role="factura">
+        <PropertyRef Name="ID_SUCURSAL_FACTURA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_PERSONA_TELEFONO">
+    <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+    <End Role="telefomno" Type="Self.telefomno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="ID_PERSONA" />
+      </Principal>
+      <Dependent Role="telefomno">
+        <PropertyRef Name="ID_PERSONA_TELEFONO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_PERSONA_USUARIO">
+    <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="persona">
+        <PropertyRef Name="ID_PERSONA" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="ID_PERSONA_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_SEXO_PERSONA">
+    <End Role="sexo" Type="Self.sexo" Multiplicity="0..1" />
+    <End Role="persona" Type="Self.persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sexo">
+        <PropertyRef Name="ID_SEXO" />
+      </Principal>
+      <Dependent Role="persona">
+        <PropertyRef Name="ID_SEXO_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_SUCURSAL_PRODUCTO">
+    <End Role="sucursal" Type="Self.sucursal" Multiplicity="0..1" />
+    <End Role="producto" Type="Self.producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sucursal">
+        <PropertyRef Name="ID_SUCURSAL" />
+      </Principal>
+      <Dependent Role="producto">
+        <PropertyRef Name="ID_SUCURSAL_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_TIPO_PRODUCTO">
+    <End Role="tipo_producto" Type="Self.tipo_producto" Multiplicity="0..1" />
+    <End Role="producto" Type="Self.producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_producto">
+        <PropertyRef Name="ID_TIPO_PRODUCTO" />
+      </Principal>
+      <Dependent Role="producto">
+        <PropertyRef Name="ID_TIPO_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_TIPO_TELEFONO">
+    <End Role="tipo_telefono" Type="Self.tipo_telefono" Multiplicity="0..1" />
+    <End Role="telefomno" Type="Self.telefomno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_telefono">
+        <PropertyRef Name="ID_TIPO_TELEFONO" />
+      </Principal>
+      <Dependent Role="telefomno">
+        <PropertyRef Name="ID_TIPO_TELEFONO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_TIPO_USUSARIO">
+    <End Role="tipo_usuario" Type="Self.tipo_usuario" Multiplicity="0..1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_usuario">
+        <PropertyRef Name="ID_TIPO_USUARIO" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="ID_TIPO_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="factura_producto">
+    <End Role="factura" Type="Self.factura" Multiplicity="*" />
+    <End Role="producto" Type="Self.producto" Multiplicity="*" />
+  </Association>
+  <Association Name="producto_proveedor">
+    <End Role="producto" Type="Self.producto" Multiplicity="*" />
+    <End Role="proveedor" Type="Self.proveedor" Multiplicity="*" />
+  </Association>
+  <Association Name="usuario_rol_bd">
+    <End Role="rol_bd" Type="Self.rol_bd" Multiplicity="*" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+  </Association>
+  <Association Name="usuario_rol_servidor">
+    <End Role="rol_servidor" Type="Self.rol_servidor" Multiplicity="*" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="bd_supermercadoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cargo_laboral" EntityType="Self.cargo_laboral" />
+    <EntitySet Name="ciudad" EntityType="Self.ciudad" />
+    <EntitySet Name="cliente" EntityType="Self.cliente" />
+    <EntitySet Name="departamento" EntityType="Self.departamento" />
+    <EntitySet Name="empleado" EntityType="Self.empleado" />
+    <EntitySet Name="factura" EntityType="Self.factura" />
+    <EntitySet Name="pais" EntityType="Self.pais" />
+    <EntitySet Name="persona" EntityType="Self.persona" />
+    <EntitySet Name="producto" EntityType="Self.producto" />
+    <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+    <EntitySet Name="rol_bd" EntityType="Self.rol_bd" />
+    <EntitySet Name="rol_servidor" EntityType="Self.rol_servidor" />
+    <EntitySet Name="sexo" EntityType="Self.sexo" />
+    <EntitySet Name="sucursal" EntityType="Self.sucursal" />
+    <EntitySet Name="telefomno" EntityType="Self.telefomno" />
+    <EntitySet Name="tipo_producto" EntityType="Self.tipo_producto" />
+    <EntitySet Name="tipo_telefono" EntityType="Self.tipo_telefono" />
+    <EntitySet Name="tipo_usuario" EntityType="Self.tipo_usuario" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="FK_ID_CARGO_LABORAL_EMPLEADO" Association="Self.FK_ID_CARGO_LABORAL_EMPLEADO">
+      <End Role="cargo_laboral" EntitySet="cargo_laboral" />
+      <End Role="empleado" EntitySet="empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEPARTAMENTO_CIUDAD" Association="Self.FK_DEPARTAMENTO_CIUDAD">
+      <End Role="departamento" EntitySet="departamento" />
+      <End Role="ciudad" EntitySet="ciudad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_CIUDAD_RESIDENCIA_PERSONA" Association="Self.FK_ID_CIUDAD_RESIDENCIA_PERSONA">
+      <End Role="ciudad" EntitySet="ciudad" />
+      <End Role="persona" EntitySet="persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_CIUDAD_SUCURSAL" Association="Self.FK_ID_CIUDAD_SUCURSAL">
+      <End Role="ciudad" EntitySet="ciudad" />
+      <End Role="sucursal" EntitySet="sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLIENTE_FACTURA" Association="Self.FK_CLIENTE_FACTURA">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="factura" EntitySet="factura" />
+    </AssociationSet>
+    <AssociationSet Name="fk_CLIENTE_PERSONA1" Association="Self.fk_CLIENTE_PERSONA1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="cliente" EntitySet="cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_PAIS_DEPARTAMENTO" Association="Self.FK_ID_PAIS_DEPARTAMENTO">
+      <End Role="pais" EntitySet="pais" />
+      <End Role="departamento" EntitySet="departamento" />
+    </AssociationSet>
+    <AssociationSet Name="fk_EMPLEADO_PERSONA1" Association="Self.fk_EMPLEADO_PERSONA1">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="empleado" EntitySet="empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_EMPLEADO" Association="Self.FK_ID_EMPLEADO">
+      <End Role="empleado" EntitySet="empleado" />
+      <End Role="factura" EntitySet="factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_SUCURSAL_EMPLEADO" Association="Self.FK_ID_SUCURSAL_EMPLEADO">
+      <End Role="sucursal" EntitySet="sucursal" />
+      <End Role="empleado" EntitySet="empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_SUCURSAL_FACTURA" Association="Self.FK_ID_SUCURSAL_FACTURA">
+      <End Role="sucursal" EntitySet="sucursal" />
+      <End Role="factura" EntitySet="factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_PERSONA_TELEFONO" Association="Self.FK_ID_PERSONA_TELEFONO">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="telefomno" EntitySet="telefomno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_PERSONA_USUARIO" Association="Self.FK_ID_PERSONA_USUARIO">
+      <End Role="persona" EntitySet="persona" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_SEXO_PERSONA" Association="Self.FK_ID_SEXO_PERSONA">
+      <End Role="sexo" EntitySet="sexo" />
+      <End Role="persona" EntitySet="persona" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_SUCURSAL_PRODUCTO" Association="Self.FK_ID_SUCURSAL_PRODUCTO">
+      <End Role="sucursal" EntitySet="sucursal" />
+      <End Role="producto" EntitySet="producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_TIPO_PRODUCTO" Association="Self.FK_ID_TIPO_PRODUCTO">
+      <End Role="tipo_producto" EntitySet="tipo_producto" />
+      <End Role="producto" EntitySet="producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_TIPO_TELEFONO" Association="Self.FK_ID_TIPO_TELEFONO">
+      <End Role="tipo_telefono" EntitySet="tipo_telefono" />
+      <End Role="telefomno" EntitySet="telefomno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_TIPO_USUSARIO" Association="Self.FK_ID_TIPO_USUSARIO">
+      <End Role="tipo_usuario" EntitySet="tipo_usuario" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="factura_producto" Association="Self.factura_producto">
+      <End Role="factura" EntitySet="factura" />
+      <End Role="producto" EntitySet="producto" />
+    </AssociationSet>
+    <AssociationSet Name="producto_proveedor" Association="Self.producto_proveedor">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="proveedor" EntitySet="proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_rol_bd" Association="Self.usuario_rol_bd">
+      <End Role="rol_bd" EntitySet="rol_bd" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_rol_servidor" Association="Self.usuario_rol_servidor">
+      <End Role="rol_servidor" EntitySet="rol_servidor" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

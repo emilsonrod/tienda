@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Tienda.Models.producto>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_ELABORACION_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_VENCIMIENTO_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COMPRA_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VENTA_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CANTIDAD_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CODIGO_PRODUCTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_producto.NOMBRE_TIPO_PRODUCTO)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_ELABORACION_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_VENCIMIENTO_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COMPRA_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VENTA_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CANTIDAD_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DESCRIPCION_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CODIGO_PRODUCTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sucursal.NOMBRE_SUCURSAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_producto.NOMBRE_TIPO_PRODUCTO)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID_PRODUCTO }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID_PRODUCTO }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_PRODUCTO })
+            </td>
+        </tr>
+    }
+
+</table>
+

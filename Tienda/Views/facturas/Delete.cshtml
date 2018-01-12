@@ -1,0 +1,84 @@
+﻿@model Tienda.Models.factura
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que desea eliminar este elemento?</h3>
+<div>
+    <h4>factura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_FACTURA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_FACTURA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cliente.ID_CLIENTE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cliente.ID_CLIENTE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.empleado.ID_EMPLEADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empleado.ID_EMPLEADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </dd>
+
+    </dl>
+    <div class="form-group col-md-12">
+        <table id="tablaDetalleProductos" class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio Unitario</th>
+                    <th scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="bodyTableDetalle">
+                @foreach (var producto in Model.factura_producto)
+                {
+                    <tr>
+                    <td>@producto.CANTIDAD_PRODUCTO</td>
+                    <td>
+                        @producto.producto.NOMBRE_PRODUCTO
+                    </td>
+                    <td>@producto.producto.VENTA_PRODUCTO</td>
+                    <td>@producto.PRECIO_TOTAL_PRODUCTO</td>                    
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="control-derecho form-inline">
+        @Html.Label("Total Compra")       
+        @Model.PRECIO_TOTAL
+    </div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a Lista", "Index")
+        </div>
+    }
+</div>

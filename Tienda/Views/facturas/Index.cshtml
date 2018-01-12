@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Tienda.Models.factura>
+
+@{
+    ViewBag.Title = "Lista Ventas";
+}
+
+<h2>Lista Ventas</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<div class="form-group">
+    <div class="col-md-10 form-inline">
+        <input type="text" class="form-control" id="fechaInicio" />
+        <input type="text" class="form-control" id="fechaFin" />
+        <input type="button" value="Buscar Venta" class="btn btn-success" onclick="BuscarVenta()" />
+    </div>
+</div>
+<div id="tableVentas" class="col-md-12">
+    @Html.Partial("_partialListFacturasView")
+</div>

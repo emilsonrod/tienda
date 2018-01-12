@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Tienda.Models.factura>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_FACTURA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cliente.ID_CLIENTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.empleado.ID_EMPLEADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRECIO_TOTAL)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_FACTURA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente.ID_CLIENTE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.empleado.ID_EMPLEADO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sucursal.NOMBRE_SUCURSAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRECIO_TOTAL)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID_FACTURA }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID_FACTURA }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_FACTURA })
+            </td>
+        </tr>
+    }
+
+</table>
+

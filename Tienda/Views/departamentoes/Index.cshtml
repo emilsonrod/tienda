@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Tienda.Models.departamento>
+
+@{
+    ViewBag.Title = "Lista Departamentos";
+}
+
+<h2>Lista Departamentos</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_DEPARTAMENTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pais.NOMBRE_PAIS)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_DEPARTAMENTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pais.NOMBRE_PAIS)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_DEPARTAMENTO }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_DEPARTAMENTO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_DEPARTAMENTO })
+        </td>
+    </tr>
+}
+
+</table>

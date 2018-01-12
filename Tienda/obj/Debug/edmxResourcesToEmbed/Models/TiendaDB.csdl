@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tiendadbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="detalleproducto">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Producto_ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DescripcionDetalle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Producto_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="producto" Relationship="Self.fk_DetalleProducto_Producto" FromRole="detalleproducto" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="detalleventa">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Venta_ID" />
+      <PropertyRef Name="Venta_Producto_ID" />
+      <PropertyRef Name="Venta_Vendedores_Id" />
+      <PropertyRef Name="Venta_Producto_ID1" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Venta_ID" Type="Int32" Nullable="false" />
+    <Property Name="Venta_Producto_ID" Type="Int32" Nullable="false" />
+    <Property Name="Venta_Vendedores_Id" Type="Int32" Nullable="false" />
+    <Property Name="Venta_Producto_ID1" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="venta" Relationship="Self.fk_DetalleVenta_Venta1" FromRole="detalleventa" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="precio" Type="Decimal" Nullable="false" />
+    <Property Name="codigoProducto" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="detalleproducto" Relationship="Self.fk_DetalleProducto_Producto" FromRole="producto" ToRole="detalleproducto" />
+    <NavigationProperty Name="productovendedor" Relationship="Self.fk_ProductoVendedor_Producto1" FromRole="producto" ToRole="productovendedor" />
+    <NavigationProperty Name="venta" Relationship="Self.fk_Venta_Producto1" FromRole="producto" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="productovendedor">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Producto_ID" />
+      <PropertyRef Name="Provedor_Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Producto_ID" Type="Int32" Nullable="false" />
+    <Property Name="Provedor_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="producto" Relationship="Self.fk_ProductoVendedor_Producto1" FromRole="productovendedor" ToRole="producto" />
+    <NavigationProperty Name="provedor" Relationship="Self.fk_ProductoVendedor_Provedor1" FromRole="productovendedor" ToRole="provedor" />
+  </EntityType>
+  <EntityType Name="provedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreProvedor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Nit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodigoProvedor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="productovendedor" Relationship="Self.fk_ProductoVendedor_Provedor1" FromRole="provedor" ToRole="productovendedor" />
+  </EntityType>
+  <EntityType Name="vendedores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreVendedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodigoVendedor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ApellidoVendedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Celular" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroCuenta" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="venta">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Producto_ID" />
+      <PropertyRef Name="Vendedores_Id" />
+      <PropertyRef Name="Producto_ID1" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto_ID" Type="Int32" Nullable="false" />
+    <Property Name="Vendedores_Id" Type="Int32" Nullable="false" />
+    <Property Name="FechaVenta" Type="DateTime" />
+    <Property Name="Producto_ID1" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="detalleventa" Relationship="Self.fk_DetalleVenta_Venta1" FromRole="venta" ToRole="detalleventa" />
+    <NavigationProperty Name="producto" Relationship="Self.fk_Venta_Producto1" FromRole="venta" ToRole="producto" />
+  </EntityType>
+  <Association Name="fk_DetalleProducto_Producto">
+    <End Role="producto" Type="Self.producto" Multiplicity="1" />
+    <End Role="detalleproducto" Type="Self.detalleproducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="detalleproducto">
+        <PropertyRef Name="Producto_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_DetalleVenta_Venta1">
+    <End Role="venta" Type="Self.venta" Multiplicity="1" />
+    <End Role="detalleventa" Type="Self.detalleventa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="venta">
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Producto_ID" />
+        <PropertyRef Name="Vendedores_Id" />
+        <PropertyRef Name="Producto_ID1" />
+      </Principal>
+      <Dependent Role="detalleventa">
+        <PropertyRef Name="Venta_ID" />
+        <PropertyRef Name="Venta_Producto_ID" />
+        <PropertyRef Name="Venta_Vendedores_Id" />
+        <PropertyRef Name="Venta_Producto_ID1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ProductoVendedor_Producto1">
+    <End Role="producto" Type="Self.producto" Multiplicity="1" />
+    <End Role="productovendedor" Type="Self.productovendedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="productovendedor">
+        <PropertyRef Name="Producto_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Venta_Producto1">
+    <End Role="producto" Type="Self.producto" Multiplicity="1" />
+    <End Role="venta" Type="Self.venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="venta">
+        <PropertyRef Name="Producto_ID1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ProductoVendedor_Provedor1">
+    <End Role="provedor" Type="Self.provedor" Multiplicity="1" />
+    <End Role="productovendedor" Type="Self.productovendedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="provedor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="productovendedor">
+        <PropertyRef Name="Provedor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="tiendadbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="detalleproducto" EntityType="Self.detalleproducto" />
+    <EntitySet Name="detalleventa" EntityType="Self.detalleventa" />
+    <EntitySet Name="producto" EntityType="Self.producto" />
+    <EntitySet Name="productovendedor" EntityType="Self.productovendedor" />
+    <EntitySet Name="provedor" EntityType="Self.provedor" />
+    <EntitySet Name="vendedores" EntityType="Self.vendedores" />
+    <EntitySet Name="venta" EntityType="Self.venta" />
+    <AssociationSet Name="fk_DetalleProducto_Producto" Association="Self.fk_DetalleProducto_Producto">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="detalleproducto" EntitySet="detalleproducto" />
+    </AssociationSet>
+    <AssociationSet Name="fk_DetalleVenta_Venta1" Association="Self.fk_DetalleVenta_Venta1">
+      <End Role="venta" EntitySet="venta" />
+      <End Role="detalleventa" EntitySet="detalleventa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ProductoVendedor_Producto1" Association="Self.fk_ProductoVendedor_Producto1">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="productovendedor" EntitySet="productovendedor" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Venta_Producto1" Association="Self.fk_Venta_Producto1">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="venta" EntitySet="venta" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ProductoVendedor_Provedor1" Association="Self.fk_ProductoVendedor_Provedor1">
+      <End Role="provedor" EntitySet="provedor" />
+      <End Role="productovendedor" EntitySet="productovendedor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

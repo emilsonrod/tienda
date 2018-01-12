@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Supermercado", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                   <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Localidad <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Lista de Ciudades", "Index", "ciudads")</li>
+                            <li>@Html.ActionLink("Lista de Departamentos", "Index", "departamentoes")</li>
+                            <li>@Html.ActionLink("Lista de Paises", "Index", "pais")</li>
+                            <li>@Html.ActionLink("Lista de Sucursales", "Index", "sucursals")</li>
+                            <li>@Html.ActionLink("Lista de Telefonos", "Index", "telefonoes")</li>
+                            <li>@Html.ActionLink("Lista de Tipo de Telefonos", "Index", "tipo_telefono")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personas <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Lista de Clientes", "Index", "clientes")</li>
+                            <li>@Html.ActionLink("Lista de Empleados", "Index", "empleadoes")</li>
+                            <li>@Html.ActionLink("Lista de Personas", "Index", "personas")</li>
+                            <li>@Html.ActionLink("Lista de Usuarios", "Index", "usuarios")</li>
+                            <li>@Html.ActionLink("Lista de Cargos", "Index", "cargo_laboral")</li>
+                            <li>@Html.ActionLink("Lista de Tipo de Usuario", "Index", "tipo_usuario")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Lista de Ventas", "Index", "facturas")</li>
+                            <li>@Html.ActionLink("Lista de Productos", "Index", "productoes")</li>
+                            <li>@Html.ActionLink("Lista de Proveedores", "Index", "proveedors")</li>
+                            <li>@Html.ActionLink("Lista de Tipo Producto", "Index", "tipo_producto")</li>                            
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

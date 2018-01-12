@@ -1,0 +1,42 @@
+﻿@model Tienda.Models.telefono
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Telefono</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEFONO1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFONO1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.PRIMER_NOMBRE_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.PRIMER_NOMBRE_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_telefono.TIPO_TELEFONO1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_telefono.TIPO_TELEFONO1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_TELEFONO }) |
+    @Html.ActionLink("Regresar a Lista", "Index")
+</p>

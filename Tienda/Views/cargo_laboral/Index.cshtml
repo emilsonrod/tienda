@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Tienda.Models.cargo_laboral>
+
+@{
+    ViewBag.Title = "Lista Cargo Laboral";
+}
+
+<h2>Lista Cargo Laboral</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CARGO_LABORAL1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION_CARGO_LABORAL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SALARIO_MENSUAL_CARGO_LABORAL)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CARGO_LABORAL1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION_CARGO_LABORAL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SALARIO_MENSUAL_CARGO_LABORAL)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_CARGO_LABORAL }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_CARGO_LABORAL }) |
+            @Html.ActionLink("Eiminar", "Delete", new { id=item.ID_CARGO_LABORAL })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Tienda.Models.usuario>
+
+@{
+    ViewBag.Title = "Lista Usuarios";
+}
+
+<h2>Lista Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_USUARIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTRASENA_USUARIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.persona.PRIMER_NOMBRE_PERSONA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_usuario.DESCRIPCION_TIO_USUARIO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONTRASENA_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.persona.PRIMER_NOMBRE_PERSONA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo_usuario.DESCRIPCION_TIO_USUARIO)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_USUARIO }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_USUARIO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_USUARIO })
+        </td>
+    </tr>
+}
+
+</table>

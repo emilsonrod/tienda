@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Tienda.Models.tipo_usuario>
+
+@{
+    ViewBag.Title = "Lista Tipo Usuario";
+}
+
+<h2>Lista Tipo Usuario</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION_TIO_USUARIO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION_TIO_USUARIO)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_TIPO_USUARIO }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID_TIPO_USUARIO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_TIPO_USUARIO })
+        </td>
+    </tr>
+}
+
+</table>

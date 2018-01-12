@@ -1,0 +1,50 @@
+﻿@model Tienda.Models.usuario
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTRASENA_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTRASENA_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.PRIMER_NOMBRE_PERSONA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.PRIMER_NOMBRE_PERSONA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_usuario.DESCRIPCION_TIO_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_usuario.DESCRIPCION_TIO_USUARIO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_USUARIO }) |
+    @Html.ActionLink("Regresar a Lista", "Index")
+</p>

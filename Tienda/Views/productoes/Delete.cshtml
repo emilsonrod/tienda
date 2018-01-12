@@ -1,0 +1,104 @@
+﻿@model Tienda.Models.producto
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que desea eliminar este item?</h3>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_ELABORACION_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_ELABORACION_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_VENCIMIENTO_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_VENCIMIENTO_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMPRA_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMPRA_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VENTA_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VENTA_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CANTIDAD_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CANTIDAD_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CODIGO_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CODIGO_PRODUCTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sucursal.NOMBRE_SUCURSAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_producto.NOMBRE_TIPO_PRODUCTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_producto.NOMBRE_TIPO_PRODUCTO)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a Lista", "Index")
+        </div>
+    }
+</div>

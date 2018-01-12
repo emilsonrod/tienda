@@ -1,0 +1,40 @@
+﻿@model Tienda.Models.sucursal
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que desea eliminar este item?</h3>
+<div>
+    <h4>Sucursal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_SUCURSAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_SUCURSAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ciudad.NOMBRE_CIUDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciudad.NOMBRE_CIUDAD)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a Lista", "Index")
+        </div>
+    }
+</div>

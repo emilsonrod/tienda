@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ed7cb3d93d641f39d8ab4978461da33" Name="Diagram1">
+        <EntityTypeShape EntityType="bd_supermercadoModel.cargo_laboral" Width="1.5" PointX="10.5" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.ciudad" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.cliente" Width="1.5" PointX="9.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.departamento" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.empleado" Width="1.5" PointX="12.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.factura" Width="1.5" PointX="12" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.factura_producto" Width="1.5" PointX="14.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.pais" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.persona" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.producto" Width="1.5" PointX="9.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.producto_proveedor" Width="1.5" PointX="12" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.proveedor" Width="1.5" PointX="9.75" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.rol_bd" Width="1.5" PointX="10.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.rol_servidor" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.sexo" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.sucursal" Width="1.5" PointX="7.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.telefono" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.tipo_producto" Width="1.5" PointX="7.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.tipo_telefono" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.tipo_usuario" Width="1.5" PointX="10.5" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_supermercadoModel.usuario" Width="1.5" PointX="12.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_CARGO_LABORAL_EMPLEADO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_DEPARTAMENTO_CIUDAD" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_CIUDAD_RESIDENCIA_PERSONA" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_CIUDAD_SUCURSAL" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_CLIENTE_FACTURA" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.fk_CLIENTE_PERSONA1" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_PAIS_DEPARTAMENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.fk_EMPLEADO_PERSONA1" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_EMPLEADO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_SUCURSAL_EMPLEADO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.fk_FACTURA_has_PRODUCTO_FACTURA1" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_SUCURSAL_FACTURA" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.fk_FACTURA_has_PRODUCTO_PRODUCTO1" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_PERSONA_TELEFONO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_PERSONA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_SEXO_PERSONA" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_SUCURSAL_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_TIPO_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.fk_PRODUCTO_has_PROVEEDOR_PRODUCTO1" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.fk_PRODUCTO_has_PROVEEDOR_PROVEEDOR1" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_TIPO_TELEFONO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.FK_ID_TIPO_USUSARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.usuario_rol_bd" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_supermercadoModel.usuario_rol_servidor" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
